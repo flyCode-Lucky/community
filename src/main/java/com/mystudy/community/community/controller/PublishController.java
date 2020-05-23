@@ -41,6 +41,25 @@ public class PublishController {
             HttpServletRequest request,
             Model model){
 
+        //配合html页面的  th:text="${title}" 来解决刷新就清空的问题
+        model.addAttribute("title",title);
+        model.addAttribute("description",description);
+        model.addAttribute("tag",tag);
+
+        //后台数据校验
+        if(title == null ||title==""){
+            model.addAttribute("error", "标题不能为空");
+            return "publish";
+        }
+        if(description == null ||description==""){
+            model.addAttribute("error", "问题补充不能为空");
+            return "publish";
+        }
+        if(tag == null ||tag==""){
+            model.addAttribute("error", "标签不能为空");
+            return "publish";
+        }
+
         //往question里填充数据
         Question question = new Question();
         //这三个是publish.html页面里写的参数，传过来直接用
@@ -54,18 +73,21 @@ public class PublishController {
         //获取user
         User user = null;
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("token")){
-                String token=cookie.getValue();
-                user = userMapper.findByToken(token);
-                if(user!=null){
-                    request.getSession().setAttribute("user",user);
-                    /* 发布者id */
-                    question.setCreator(user.getId());
+        if(cookies!=null&&cookies.length!=0){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("token")){
+                    String token=cookie.getValue();
+                    user = userMapper.findByToken(token);
+                    if(user!=null){
+                        request.getSession().setAttribute("user",user);
+                        /* 发布者id */
+                        question.setCreator(user.getId());
+                    }
+                    break;
                 }
-                break;
             }
         }
+
         if(user==null) {
             model.addAttribute("error", "用户未登录");
             return "publish";
