@@ -3,6 +3,9 @@ package com.mystudy.community.community.mapper;
 import com.mystudy.community.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @描述
@@ -14,4 +17,7 @@ public interface QuesstionMapper {
 
     @Insert("insert into question(title,description,gmt_create,gmt_modified,creator,tag) values(#{title},#{description},#{gmt_create},#{gmt_modified},#{creator},#{tag})")
     void creat(Question question);
+
+    @Select("select * from question")
+    List<Question> list();
 }

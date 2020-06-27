@@ -51,6 +51,10 @@ public class PublishController {
             model.addAttribute("error", "标题不能为空");
             return "publish";
         }
+        if(title.length()>=50){
+            model.addAttribute("error", "标题过长，请用简洁的语言描述！");
+            return "publish";
+        }
         if(description == null ||description==""){
             model.addAttribute("error", "问题补充不能为空");
             return "publish";

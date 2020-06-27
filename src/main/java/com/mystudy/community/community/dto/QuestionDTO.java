@@ -1,14 +1,15 @@
-package com.mystudy.community.community.model;
+package com.mystudy.community.community.dto;
 
+import com.mystudy.community.community.model.User;
 import lombok.Data;
 
 /**
  * @描述
  * @创建人 CYH
- * @创建时间 2020/5/23
+ * @创建时间 2020/6/27
  */
 @Data
-public class Question {
+public class QuestionDTO {
     private Integer id;
     private String title;
     private String description;
@@ -16,7 +17,8 @@ public class Question {
     private Long gmt_create;
     private Long gmt_modified;
     private Integer creator;
-    private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
+    private Integer viewCount;
+    private User user;
 }

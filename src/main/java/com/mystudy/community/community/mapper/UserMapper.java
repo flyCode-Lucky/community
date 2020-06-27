@@ -20,6 +20,7 @@ public interface UserMapper {
     @Select("select * from USER where token = #{token} ")
     User findByToken(@Param("token") String token);//参数的话要加@Param()
 
-
+    @Select("select * from USER where ID = #{Id} ")
+    User findById(Integer creator);
 }
 
