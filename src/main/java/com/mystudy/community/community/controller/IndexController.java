@@ -1,5 +1,6 @@
 package com.mystudy.community.community.controller;
 
+import com.mystudy.community.community.dto.PaginationDTO;
 import com.mystudy.community.community.dto.QuestionDTO;
 import com.mystudy.community.community.mapper.UserMapper;
 import com.mystudy.community.community.model.Question;
@@ -8,6 +9,7 @@ import com.mystudy.community.community.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -26,7 +28,9 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
-                        Model model){
+                        Model model,
+                        @RequestParam(name="page",defaultValue ="1") Integer page,
+                        @RequestParam(name="size",defaultValue ="1") Integer size){
         Cookie[] cookies = request.getCookies();
         if(cookies!=null&&cookies.length!=0){
             for(Cookie cookie:cookies){
@@ -42,8 +46,10 @@ public class IndexController {
             }
         }
 
-        List<QuestionDTO> questionList = questionService.list();//通过service层的方法将question和user合在一起的questionDTO整合起来
-        model.addAttribute("questions",questionList);//添加到model里面，方便在html页面渲染
+        //通过service层的方法将question和user合在一起的questionDTO整合起来
+        PaginationDTO pagination = questionService.list(page,size);
+        //添加到model里面，方便在html页面渲染
+        model.addAttribute("pagination",pagination);
 
         return "index";
     }
