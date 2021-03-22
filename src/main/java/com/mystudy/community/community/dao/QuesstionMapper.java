@@ -1,18 +1,13 @@
-package com.mystudy.community.community.mapper;
+package com.mystudy.community.community.dao;
 
-import com.mystudy.community.community.model.Question;
+import com.mystudy.community.community.entity.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * @描述
- * @创建人 CYH
- * @创建时间 2020/5/23
- */
+
 @Mapper
 public interface QuesstionMapper {
 

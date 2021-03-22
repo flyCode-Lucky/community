@@ -2,28 +2,20 @@ package com.mystudy.community.community.controller;
 
 import com.mystudy.community.community.dto.AccessTokenDTO;
 import com.mystudy.community.community.dto.GithubUser;
-import com.mystudy.community.community.mapper.UserMapper;
-import com.mystudy.community.community.model.User;
+import com.mystudy.community.community.dao.UserMapper;
+import com.mystudy.community.community.entity.User;
 import com.mystudy.community.community.provider.GithubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
-/**
- * @描述
- * @创建人 ChenYuHuan
- * @创建时间 2020/4/24
- */
 @Controller
 public class AuthorizeController {
 

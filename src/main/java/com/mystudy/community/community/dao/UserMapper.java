@@ -1,16 +1,12 @@
-package com.mystudy.community.community.mapper;
+package com.mystudy.community.community.dao;
 
-import com.mystudy.community.community.model.User;
+import com.mystudy.community.community.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-/**
- * @描述
- * @创建人 ChenYuHuan
- * @创建时间 2020/5/10
- */
+
 @Mapper
 public interface UserMapper {
 

@@ -1,16 +1,11 @@
 package com.mystudy.community.community.dto;
 
-import com.mystudy.community.community.model.Question;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @描述
- * @创建人 CYH
- * @创建时间 2020/6/29
- */
+
 @Data
 public class PaginationDTO {
     private List<QuestionDTO> questions;

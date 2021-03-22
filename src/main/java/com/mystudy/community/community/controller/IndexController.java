@@ -1,10 +1,8 @@
 package com.mystudy.community.community.controller;
 
 import com.mystudy.community.community.dto.PaginationDTO;
-import com.mystudy.community.community.dto.QuestionDTO;
-import com.mystudy.community.community.mapper.UserMapper;
-import com.mystudy.community.community.model.Question;
-import com.mystudy.community.community.model.User;
+import com.mystudy.community.community.dao.UserMapper;
+import com.mystudy.community.community.entity.User;
 import com.mystudy.community.community.service.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 
 @Controller

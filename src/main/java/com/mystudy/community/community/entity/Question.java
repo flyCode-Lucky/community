@@ -1,11 +1,10 @@
-package com.mystudy.community.community.dto;
+package com.mystudy.community.community.entity;
 
-import com.mystudy.community.community.entity.User;
 import lombok.Data;
 
 
 @Data
-public class QuestionDTO {
+public class Question {
     private Integer id;
     private String title;
     private String description;
@@ -13,8 +12,7 @@ public class QuestionDTO {
     private Long gmt_create;
     private Long gmt_modified;
     private Integer creator;
+    private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
-    private Integer viewCount;
-    private User user;
 }

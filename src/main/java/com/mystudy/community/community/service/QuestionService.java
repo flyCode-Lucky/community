@@ -2,10 +2,10 @@ package com.mystudy.community.community.service;
 
 import com.mystudy.community.community.dto.PaginationDTO;
 import com.mystudy.community.community.dto.QuestionDTO;
-import com.mystudy.community.community.mapper.QuesstionMapper;
-import com.mystudy.community.community.mapper.UserMapper;
-import com.mystudy.community.community.model.Question;
-import com.mystudy.community.community.model.User;
+import com.mystudy.community.community.dao.QuesstionMapper;
+import com.mystudy.community.community.dao.UserMapper;
+import com.mystudy.community.community.entity.Question;
+import com.mystudy.community.community.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @描述
- * @创建人 CYH
- * @创建时间 2020/6/27
- */
 @Service
 public class QuestionService {
 

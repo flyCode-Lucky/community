@@ -1,10 +1,9 @@
 package com.mystudy.community.community.controller;
 
-import com.mysql.cj.Session;
-import com.mystudy.community.community.mapper.QuesstionMapper;
-import com.mystudy.community.community.mapper.UserMapper;
-import com.mystudy.community.community.model.Question;
-import com.mystudy.community.community.model.User;
+import com.mystudy.community.community.dao.QuesstionMapper;
+import com.mystudy.community.community.dao.UserMapper;
+import com.mystudy.community.community.entity.Question;
+import com.mystudy.community.community.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @描述
- * @创建人 CYH
- * @创建时间 2020/5/13
- */
+
 @Controller
 public class PublishController {
 

@@ -12,9 +12,7 @@ import java.io.IOException;
 
 
 
-/**
- * @author ACER
- */
+
 @Component
 public class GithubProvider {
 
