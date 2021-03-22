@@ -18,26 +18,8 @@ public class PaginationDTO {
     private Integer totalPage;
 
 
-    /**
-     * 根据数据总条数，数据总页数，每页大小来设置进度条的显示信息
-     *
-     * @param totalCount 数据总条数
-     * @param page       数据总页数
-     * @param size       每页大小
-     */
-    public void setPagination(Integer totalCount, Integer page, Integer size) {
-
-
-        if (totalCount % size == 0) {
-            totalPage = totalCount / size;
-        } else {
-            totalPage = totalCount / size + 1;
-        }
-
-
-        if (page > totalPage) {
-            page = totalPage;
-        }
+    public void setPagination(Integer totalPage, Integer page) {
+        this.totalPage = totalPage;
         this.page = page;
 
         //将当前页加入pages

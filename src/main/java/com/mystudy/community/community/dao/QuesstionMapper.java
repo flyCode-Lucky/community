@@ -3,6 +3,7 @@ package com.mystudy.community.community.dao;
 import com.mystudy.community.community.entity.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -17,6 +18,15 @@ public interface QuesstionMapper {
     @Select("select * from question limit #{offset},#{size} ")
     List<Question> list(Integer offset, Integer size);
 
+    @Select("select * from question where creator = #{userId} limit #{offset},#{size} ")
+    List<Question> listByUserID(Integer userId ,Integer offset, Integer size);
+
+
     @Select("select count(1) from question")
     Integer count();
+
+
+
+    @Select("select count(1) from question where creator = #{userId}")
+    Integer countByUserId(Integer userId);
 }
