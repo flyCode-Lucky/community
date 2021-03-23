@@ -19,4 +19,8 @@ public class Question {
     private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
+
+    public Long getGmt_create() {
+        return gmt_create;
+    }
 }

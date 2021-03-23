@@ -1,7 +1,6 @@
 package com.mystudy.community.community.controller;
 
-import com.mystudy.community.community.dao.QuesstionMapper;
-import com.mystudy.community.community.dao.UserMapper;
+import com.mystudy.community.community.dao.QuestionMapper;
 import com.mystudy.community.community.entity.Question;
 import com.mystudy.community.community.entity.User;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -19,9 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class PublishController {
 
     @Resource
-    private QuesstionMapper quesstionMapper;
-    @Resource
-    private UserMapper userMapper;
+    private QuestionMapper questionMapper;
 
     @GetMapping("/publish")
     public String publish(){
@@ -70,22 +66,7 @@ public class PublishController {
         question.setGmt_modified(question.getGmt_create());
 
         //获取user
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null&&cookies.length!=0){
-            for(Cookie cookie:cookies){
-                if(cookie.getName().equals("token")){
-                    String token=cookie.getValue();
-                    user = userMapper.findByToken(token);
-                    if(user!=null){
-                        request.getSession().setAttribute("user",user);
-                        /* 发布者id */
-                        question.setCreator(user.getId());
-                    }
-                    break;
-                }
-            }
-        }
+        User user =(User) request.getSession().getAttribute("user");
 
         if(user==null) {
             model.addAttribute("error", "用户未登录");
@@ -94,7 +75,7 @@ public class PublishController {
 
 
         //将准备好的question插入数据库
-        quesstionMapper.creat(question);
+        questionMapper.creat(question);
         return "redirect:/";
     }
 

@@ -14,14 +14,14 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CommunityApplication.class)
-class QuesstionMapperTest {
+class QuestionMapperTest {
 
     @Autowired
-    QuesstionMapper quesstionMapper;
+    QuestionMapper questionMapper;
 
     @Test
     void count() {
-        Integer count= quesstionMapper.count();
+        Integer count= questionMapper.count();
         //System.out.println(count);
         assert count!=null;
     }
@@ -30,8 +30,16 @@ class QuesstionMapperTest {
     void list(){
         Integer page=2;
         Integer size=1;
-        List<Question> result= quesstionMapper.list(page,size);
+        List<Question> result= questionMapper.list(page,size);
         Assert.assertEquals(1,result.size());
     }
+    
+    @Test
+    void getById(){
+        Integer id=11;
+        Question question = questionMapper.getById(id);
+        Assert.assertNotNull(question.getId());
+    }
+    
 
 }

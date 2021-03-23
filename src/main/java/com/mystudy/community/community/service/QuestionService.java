@@ -2,7 +2,7 @@ package com.mystudy.community.community.service;
 
 import com.mystudy.community.community.dto.PaginationDTO;
 import com.mystudy.community.community.dto.QuestionDTO;
-import com.mystudy.community.community.dao.QuesstionMapper;
+import com.mystudy.community.community.dao.QuestionMapper;
 import com.mystudy.community.community.dao.UserMapper;
 import com.mystudy.community.community.entity.Question;
 import com.mystudy.community.community.entity.User;
@@ -18,7 +18,7 @@ public class QuestionService {
 
     //准备好两个表的mapper（从数据库查询记录）
     @Resource
-    private QuesstionMapper quesstionMapper;
+    private QuestionMapper questionMapper;
     @Resource
     private UserMapper userMapper;
 
@@ -34,7 +34,7 @@ public class QuestionService {
 
         Integer totalPage;
 
-        Integer totalCount = quesstionMapper.count();
+        Integer totalCount = questionMapper.count();
 
         if(totalCount%size==0){
             totalPage = totalCount /size ;
@@ -53,7 +53,11 @@ public class QuestionService {
         paginationDTO.setPagination(totalPage,page);
 
         Integer offset = size*(page-1);
-        List<Question> questions = quesstionMapper.list(offset,size);//查询出questionn表中所有的提问
+        //***
+        if(offset<=0){
+            offset=0;
+        }
+        List<Question> questions = questionMapper.list(offset,size);//查询出questionn表中所有的提问
         List<QuestionDTO> questionDTOList = new ArrayList<>();//准备好一个空的questionDTO列表
 
         //循环上面查出的所有问题，通过问题创建者将他们的user找出来和question一起加到questionDTO里面
@@ -73,7 +77,7 @@ public class QuestionService {
 
         Integer totalPage;
 
-        Integer totalCount = quesstionMapper.countByUserId(userId);
+        Integer totalCount = questionMapper.countByUserId(userId);
 
         if(totalCount%size==0){
             totalPage = totalCount /size ;
@@ -92,7 +96,11 @@ public class QuestionService {
         paginationDTO.setPagination(totalPage,page);
 
         Integer offset = size*(page-1);
-        List<Question> questions = quesstionMapper.listByUserID(userId,offset,size);
+        //***
+        if(offset<=0){
+            offset=0;
+        }
+        List<Question> questions = questionMapper.listByUserID(userId,offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         //循环上面查出的所有问题，通过问题创建者将他们的user找出来和question一起加到questionDTO里面
@@ -105,5 +113,14 @@ public class QuestionService {
         }
         paginationDTO.setQuestions(questionDTOList);
         return paginationDTO;
+    }
+
+    public QuestionDTO getById(Integer id) {
+        Question question = questionMapper.getById(id);
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);//将question全部映射到questionDTO里面
+        User user = userMapper.findById(question.getCreator());//通过创建者找出user
+        questionDTO.setUser(user);
+        return questionDTO;
     }
 }
